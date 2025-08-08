@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw7nx21skisj6"]
+
+[ext_resource type="PackedScene" uid="uid://b5j4psnk8p1my" path="res://scns/target.tscn" id="1_i4cn3"]
+[ext_resource type="Script" uid="uid://cunvtk7cvjlw1" path="res://scns/world.gd" id="1_rfp4f"]
+[ext_resource type="FontFile" uid="uid://03pulwbe2idi" path="res://assets/operius-regular.ttf" id="2_umgc5"]
+[ext_resource type="Script" uid="uid://dq5rqxug1ev37" path="res://scrpts/corner.gd" id="4_n7lkt"]
+[ext_resource type="AudioStream" uid="uid://cbuc6c5yv0upi" path="res://assets/sfx_corn.mp3" id="5_4onbs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w11gh"]
+size = Vector2(1174, 132.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5j8tm"]
+size = Vector2(124, 697)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ce31w"]
+font = ExtResource("2_umgc5")
+font_size = 20
+font_color = Color(0.205117, 0.205117, 0.205117, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cngw5"]
+size = Vector2(29, 27.75)
+
+[node name="world" type="Node2D"]
+script = ExtResource("1_rfp4f")
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="top" type="CollisionShape2D" parent="walls"]
+position = Vector2(576, -68)
+shape = SubResource("RectangleShape2D_w11gh")
+
+[node name="bottom" type="CollisionShape2D" parent="walls"]
+position = Vector2(573, 714)
+shape = SubResource("RectangleShape2D_w11gh")
+
+[node name="left" type="CollisionShape2D" parent="walls"]
+position = Vector2(-64, 346)
+shape = SubResource("RectangleShape2D_5j8tm")
+
+[node name="right" type="CollisionShape2D" parent="walls"]
+position = Vector2(1216, 342)
+shape = SubResource("RectangleShape2D_5j8tm")
+
+[node name="target" parent="." instance=ExtResource("1_i4cn3")]
+position = Vector2(569, 298)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 468.0
+offset_top = 5.0
+offset_right = 684.0
+offset_bottom = 85.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_ce31w")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Corner" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corner"]
+position = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Corner"]
+position = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.0
+
+[node name="Corner2" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corner2"]
+position = Vector2(1150.5, 3.5)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner2"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.0
+
+[node name="Corner3" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corner3"]
+position = Vector2(1149, 640)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner3"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.0
+
+[node name="Corner4" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corner4"]
+position = Vector2(1, 642.125)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner4"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.0
+
+[connection signal="body_entered" from="Corner" to="Corner" method="_on_body_entered"]
+[connection signal="body_entered" from="Corner2" to="Corner2" method="_on_body_entered"]
+[connection signal="body_entered" from="Corner3" to="Corner3" method="_on_body_entered"]
+[connection signal="body_entered" from="Corner4" to="Corner4" method="_on_body_entered"]

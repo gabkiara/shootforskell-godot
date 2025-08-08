@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://bw7nx21skisj6"]
+
+[ext_resource type="PackedScene" uid="uid://b5j4psnk8p1my" path="res://scns/target.tscn" id="1_i4cn3"]
+[ext_resource type="FontFile" uid="uid://03pulwbe2idi" path="res://assets/operius-regular.ttf" id="2_umgc5"]
+[ext_resource type="PackedScene" uid="uid://c15drwidp8sqo" path="res://scns/shop.tscn" id="3_lfyda"]
+[ext_resource type="Script" path="res://scrpts/corner.gd" id="4_n7lkt"]
+[ext_resource type="AudioStream" uid="uid://cbuc6c5yv0upi" path="res://assets/sfx_corn.mp3" id="5_4onbs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w11gh"]
+size = Vector2(1174, 132.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5j8tm"]
+size = Vector2(124, 697)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ce31w"]
+font = ExtResource("2_umgc5")
+font_size = 160
+font_color = Color(0.205117, 0.205117, 0.205117, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cngw5"]
+size = Vector2(94, 96)
+
+[node name="world" type="Node2D"]
+
+[node name="walls" type="StaticBody2D" parent="."]
+
+[node name="top" type="CollisionShape2D" parent="walls"]
+position = Vector2(576, -68)
+shape = SubResource("RectangleShape2D_w11gh")
+
+[node name="bottom" type="CollisionShape2D" parent="walls"]
+position = Vector2(573, 714)
+shape = SubResource("RectangleShape2D_w11gh")
+
+[node name="left" type="CollisionShape2D" parent="walls"]
+position = Vector2(-64, 346)
+shape = SubResource("RectangleShape2D_5j8tm")
+
+[node name="right" type="CollisionShape2D" parent="walls"]
+position = Vector2(1216, 342)
+shape = SubResource("RectangleShape2D_5j8tm")
+
+[node name="target" parent="." instance=ExtResource("1_i4cn3")]
+position = Vector2(273, 290)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 135.0
+offset_top = 63.0
+offset_right = 1027.0
+offset_bottom = 561.0
+label_settings = SubResource("LabelSettings_ce31w")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 1
+
+[node name="Shop" parent="." instance=ExtResource("3_lfyda")]
+visible = false
+position = Vector2(-5, -17)
+
+[node name="Corner" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Corner"]
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.25
+
+[node name="Corner2" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Corner2"]
+position = Vector2(1154, -1)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner2"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.25
+
+[node name="Corner3" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Corner3"]
+position = Vector2(7, 646)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner3"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.25
+
+[node name="Corner4" type="Area2D" parent="." groups=["corners"]]
+script = ExtResource("4_n7lkt")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Corner4"]
+position = Vector2(1146, 656)
+shape = SubResource("RectangleShape2D_cngw5")
+debug_color = Color(0.944759, 0.167454, 0.423846, 0.42)
+
+[node name="sfx_corn" type="AudioStreamPlayer" parent="Corner4"]
+stream = ExtResource("5_4onbs")
+volume_db = -10.0
+pitch_scale = 2.25
+
+[connection signal="body_entered" from="Corner" to="Corner" method="_on_body_entered"]
+[connection signal="body_entered" from="Corner2" to="Corner2" method="_on_body_entered"]
+[connection signal="body_entered" from="Corner3" to="Corner3" method="_on_body_entered"]
+[connection signal="body_entered" from="Corner4" to="Corner4" method="_on_body_entered"]

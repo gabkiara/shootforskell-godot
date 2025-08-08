@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://c15drwidp8sqo"]
+
+[ext_resource type="Script" path="res://scns/shopmenu.gd" id="1_mmqbr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jkpwl"]
+
+[node name="Shop" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 383.0
+offset_top = 56.0
+offset_right = 733.0
+offset_bottom = 645.0
+script = ExtResource("1_mmqbr")
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 114.0
+offset_right = 291.0
+offset_bottom = 148.0
+text = "BUY"
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 116.0
+offset_right = 95.0
+offset_bottom = 139.0
+text = "Increase speed"
+label_settings = SubResource("LabelSettings_jkpwl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Panel/Button" to="Panel" method="_on_upgrade_button_pressed"]
